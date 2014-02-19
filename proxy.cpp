@@ -21,7 +21,7 @@ using namespace std;
 
 
 int get_req_from_client(int new_fd, char *buf, int buf_size);
-int parse_req(char *buf, int max);
+int parse_req(char *buf, int max, char *newbuf, int& newind);
 int getnextword(char* buf, int max, int& ind, char *word);
 
 void sigchld_handler(int s)
@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
 		int newind=0;
 		int pr = parse_req(buf, byte_count, newbuf, newind);
 		k=0;
-		printf("NEW BUFFER!!\n")
+		printf("NEW BUFFER!!\n");
 		while(k<newind)
 		{
 			printf("%c", newbuf[k]);
@@ -272,27 +272,34 @@ int parse_req(char *buf, int max, char *newbuf, int& newind)
 	}
 
 	printf("\n");
-
+	cout << "Checkpoint1" << endl;
 	bool is_url=true;
 	char *host;
 	char *path;
 	int hostlen;
+	host=(char*)malloc(200);
+	cout << "Checkpoint5" << endl;
 	if(strncmp(word, "http", 4)==0)
 	{
+		cout << "Checkpoint8" << endl;
+		cout << strlen(word) << endl;
 		is_url=true;
-		strcpy(host, word+7);
+		cout << strncpy(host, word+7, strlen(word)-7) << endl;
 		hostlen=word_size-7;
+		cout << "Checkpoint3" << endl;
+
 	}
 	else if (word[0]=='/')
 	{
+		cout << "Checkpoint10" << endl;
 		is_url=false;
 		strcpy(path, word);
 	}
 	else
 	{
-		//bad request
+		cout << "Checkpoint6" << endl;
 	}
-
+	cout << "Checkpoint2" << endl;
 	//ind+=word_size;
 	if(!isspace(buf[ind]))
 	{
@@ -346,6 +353,7 @@ int parse_req(char *buf, int max, char *newbuf, int& newind)
 	newind+=2;
 	while(ind<max)
 	{
+		cout << ind << endl;
 		word_size=getnextword(buf, max, ind, word);
 		if(word[word_size-1]==':')
 		{
@@ -357,7 +365,7 @@ int parse_req(char *buf, int max, char *newbuf, int& newind)
 			word_size=getnextword(buf, max, ind, word);
 			strcat(newbuf+newind, word);
 			newind+=word_size;
-			strcat(newbuf+newind, "\r\n")
+			strcat(newbuf+newind, "\r\n");
 			newind+=2;
 		}
 		else
@@ -389,7 +397,13 @@ int getnextword(char* buf, int max, int& ind, char *word)
 	int end=ind;
 
 	strncpy(word, buf+start, end-start);
-
-
+	cout << "ingetnextword" << endl;
+	int k=0	;
+	while(k<(end-start))
+	{
+		printf("%c", word[k]);
+		k++;
+	}
+	cout << endl;
 	return end-start;
 }
