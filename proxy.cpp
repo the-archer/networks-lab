@@ -22,7 +22,7 @@ using namespace std;
 
 int get_req_from_client(int new_fd, char *buf, int buf_size);
 int parse_req(char *buf, int max);
-
+int getnextword(char* buf, int max, int ind, char *word);
 
 void sigchld_handler(int s)
 {
@@ -193,7 +193,7 @@ int main(int argc, char *argv[])
 int get_req_from_client(int new_fd, char *buf, int buf_size)
 {
 	bool end=false;
-	
+	bool flag=false;
 	int cur_count=0;
 	//char buf[512];
 	while(!end)
@@ -201,18 +201,29 @@ int get_req_from_client(int new_fd, char *buf, int buf_size)
 
 
 	int byte_count = recv(new_fd, buf+cur_count, buf_size, 0);
-	
+	printf("%d\n", byte_count);
 	//printf("recv()'d %d bytes of data in buf\n", byte_count);
 		int k=0;
 		while(k<byte_count)
 		{
-			if(buf[k]=='\r' && buf[k+1]=='\n' && buf[k+2]=='\r' && buf[k+3]=='\n')
+			if(buf[k+cur_count]=='\r' && buf[k+1+cur_count]=='\n')
 			{
 				//printf("here\n");
-				end=true;
+				if(flag)
+				{
+					end=true;
+					//cout << "end" << endl;
+				}
+				//cout << "flag" << endl;
+				flag=true;
+
 				break;
 
-			}	
+			}
+			else
+			{
+				flag=false;
+			}
 			//printf("%c", buf[k]);
 			k++;
 
@@ -228,12 +239,101 @@ int get_req_from_client(int new_fd, char *buf, int buf_size)
 
 int parse_req(char *buf, int max)
 {
-	if(strcmp("GET", buf)==0)
+	if(strncmp("GET", buf, 3)!=0)
 	{
-		printf("Matched\n");
+		//Throw up error !
 	}
+	int ind=3;
+	//int fwd=0;
+
+	if(!isspace(buf[ind]))
+	{
+		//bad request
+	}
+	ind++;
+	char *word;
+	word = (char*)malloc(1000);
+
+	int word_size=getnextword(buf, max, ind, word);
+	int k=0;
+	while(k<word_size)
+	{
+		printf("%c", word[k]);
+		k++;
+	}
+
+	printf("\n");
+
+	bool is_url=true;
+	char *url;
+	char *path;
+	if(strncmp(word, "http", 4)==0)
+	{
+		is_url=true;
+		strcpy(url, word);
+	}
+	else if (word[0]=='/')
+	{
+		is_url=false;
+		strcpy(path, word);
+	}
+	else
+	{
+		//bad request
+	}
+
+	ind+=word_size;
+	if(!isspace(buf[ind]))
+	{
+		//bad request
+	}
+	word_size=getnextword(buf, max, ind, word);
+	ind+=word_size;
+	k=0;
+	while(k<word_size)
+	{
+		printf("%c", word[k]);
+		k++;
+	}
+
+	printf("\n");
+	if(strcmp("HTTP/1.0", word)==0 || strcmp("HTTP/1.1", word)==0 || strcmp("HTTP/0.9", word)==0)
+	{
+		//ok
+	}
+	else
+	{
+		//bad request
+	}
+
+	if(!is_url)
+	{
+		word_size=getnextword(buf, max, ind, word);
+	}
+
+
+
 	return 0;
 
 
 
+}
+
+int getnextword(char* buf, int max, int ind, char *word)
+{
+	while(isspace(buf[ind]))
+	{
+		ind++;
+	}
+	int start=ind;
+	while(!isspace(buf[ind]))
+	{
+		ind++;
+	}
+	int end=ind;
+
+	strncpy(word, buf+start, end-start);
+
+
+	return end-start;
 }
