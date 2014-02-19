@@ -22,7 +22,7 @@ using namespace std;
 
 int get_req_from_client(int new_fd, char *buf, int buf_size);
 int parse_req(char *buf, int max);
-int getnextword(char* buf, int max, int ind, char *word);
+int getnextword(char* buf, int max, int& ind, char *word);
 
 void sigchld_handler(int s)
 {
@@ -151,9 +151,18 @@ int main(int argc, char *argv[])
 			k++;
 		}
 		printf("\n");
-
-		int pr = parse_req(buf, byte_count);
-		
+		char *newbuf;
+		newbuf=(char*)malloc(50000);
+		int newind=0;
+		int pr = parse_req(buf, byte_count, newbuf, newind);
+		k=0;
+		printf("NEW BUFFER!!\n")
+		while(k<newind)
+		{
+			printf("%c", newbuf[k]);
+			k++;
+		}
+		printf("\n");
 
 		close(new_fd);
 		/*printf("server: got connection from %s\n", s);
@@ -237,7 +246,7 @@ int get_req_from_client(int new_fd, char *buf, int buf_size)
 }
 
 
-int parse_req(char *buf, int max)
+int parse_req(char *buf, int max, char *newbuf, int& newind)
 {
 	if(strncmp("GET", buf, 3)!=0)
 	{
@@ -265,12 +274,14 @@ int parse_req(char *buf, int max)
 	printf("\n");
 
 	bool is_url=true;
-	char *url;
+	char *host;
 	char *path;
+	int hostlen;
 	if(strncmp(word, "http", 4)==0)
 	{
 		is_url=true;
-		strcpy(url, word);
+		strcpy(host, word+7);
+		hostlen=word_size-7;
 	}
 	else if (word[0]=='/')
 	{
@@ -282,13 +293,13 @@ int parse_req(char *buf, int max)
 		//bad request
 	}
 
-	ind+=word_size;
+	//ind+=word_size;
 	if(!isspace(buf[ind]))
 	{
 		//bad request
 	}
 	word_size=getnextword(buf, max, ind, word);
-	ind+=word_size;
+	//ind+=word_size;
 	k=0;
 	while(k<word_size)
 	{
@@ -306,11 +317,56 @@ int parse_req(char *buf, int max)
 		//bad request
 	}
 
+
 	if(!is_url)
 	{
 		word_size=getnextword(buf, max, ind, word);
+		//ind+=word_size;
+		if(strcmp("Host:", word)!=0)
+		{
+			//bad request
+		}
+		else
+		{
+			word_size=getnextword(buf, max, ind, word);
+			strcpy(host, word);
+			hostlen=word_size;
+		}
 	}
 
+	
+	//int newind=0;
+	
+
+	strcat(newbuf, "GET / HTTP/1.0\r\nHost: ");
+	newind=24;
+	strcat(newbuf+24, host);
+	newind+=hostlen;
+	strcat(newbuf+newind, "\r\n");
+	newind+=2;
+	while(ind<max)
+	{
+		word_size=getnextword(buf, max, ind, word);
+		if(word[word_size-1]==':')
+		{
+			strcat(newbuf+newind, word);
+			newind+=word_size;
+			strcat(newbuf+newind, " ");
+			newind++;
+			
+			word_size=getnextword(buf, max, ind, word);
+			strcat(newbuf+newind, word);
+			newind+=word_size;
+			strcat(newbuf+newind, "\r\n")
+			newind+=2;
+		}
+		else
+		{
+			//bad request
+		}
+
+	}
+	strcat(newbuf +newind, "\r\n");
 
 
 	return 0;
@@ -319,7 +375,7 @@ int parse_req(char *buf, int max)
 
 }
 
-int getnextword(char* buf, int max, int ind, char *word)
+int getnextword(char* buf, int max, int& ind, char *word)
 {
 	while(isspace(buf[ind]))
 	{
