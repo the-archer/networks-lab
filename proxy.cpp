@@ -18,10 +18,10 @@ using namespace std;
 
 
 #define BACKLOG 3
-
+//#define PORT "80"
 
 int get_req_from_client(int new_fd, char *buf, int buf_size);
-int parse_req(char *buf, int max, char *newbuf, int& newind, int& port);
+int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char* host);
 int getnextword(char* buf, int max, int& ind, char *word);
 
 void sigchld_handler(int s)
@@ -153,10 +153,14 @@ int main(int argc, char *argv[])
 		printf("\n");
 		char *newbuf;
 		newbuf=(char*)malloc(50000);
+		char *host;
+		host=(char*)malloc(200);
 		int newind=0;
 
-		int port=80;
-		int pr = parse_req(buf, byte_count, newbuf, newind, port);
+		char *port;
+		port=(char*)malloc(10);
+		strcpy(port, "80");
+		int pr = parse_req(buf, byte_count, newbuf, newind, port, host);
 		k=0;
 		printf("NEW BUFFER!!\n");
 		while(k<newind)
@@ -167,8 +171,55 @@ int main(int argc, char *argv[])
 		printf("\n");
 		cout << newind << endl;
 
-		int srs = send_req_to_server()
-		send_req_to_server()
+		int sockfd2;
+		struct addrinfo hints2, *servinfo2, *p2;
+
+		memset(&hints2, 0, sizeof hints2);
+		hints2.ai_family = AF_UNSPEC;
+		hints2.ai_socktype = SOCK_STREAM;
+		int rv2;
+		//char* finalport;
+		//finalport=(char*)malloc(10);
+		//cout << port;
+		if ((rv2 = getaddrinfo(host, port, &hints2, &servinfo2)) != 0) {
+		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv2 ));
+		return 1;
+		}
+
+		cout << rv2 << endl;
+
+		// loop through all the results and connect to the first we can
+		for(p2 = servinfo2; p2 != NULL; p2 = p2->ai_next) {
+			if ((sockfd2 = socket(p2->ai_family, p2->ai_socktype,
+					p2->ai_protocol)) == -1) {
+				perror("client: socket");
+				continue;
+			}
+
+			if (connect(sockfd2, p2->ai_addr, p2->ai_addrlen) == -1) {
+				close(sockfd);
+				perror("client: connect");
+				continue;
+			}
+
+			break;
+		}
+
+		if (p2 == NULL) {
+		fprintf(stderr, "failed to connect to server\n");
+		return 2;
+		}
+
+		inet_ntop(p2->ai_family, get_in_addr((struct sockaddr *)p2->ai_addr),
+			s, sizeof s);
+		printf("server: connecting to %s\n", s);
+
+		freeaddrinfo(servinfo2); // all done with this structure
+
+
+
+		//int srs = send_req_to_server()
+		//send_req_to_server()
 
 		close(new_fd);
 		/*printf("server: got connection from %s\n", s);
@@ -252,7 +303,7 @@ int get_req_from_client(int new_fd, char *buf, int buf_size)
 }
 
 
-int parse_req(char *buf, int max, char *newbuf, int& newind, int& port)
+int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *host)
 {
 	if(strncmp("GET", buf, 3)!=0)
 	{
@@ -280,10 +331,10 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, int& port)
 	printf("\n");
 	cout << "Checkpoint1" << endl;
 	bool is_url=true;
-	char *host;
+	
 	char *path;
 	int hostlen;
-	host=(char*)malloc(200);
+	
 	cout << "Checkpoint5" << endl;
 	if(strncmp(word, "http", 4)==0)
 	{
