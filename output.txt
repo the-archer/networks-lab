@@ -1,0 +1,26 @@
+Proxy server running...
+server: got connection from 127.0.0.1
+39
+
+2
+
+recv()'d 41 bytes of data in buf
+GET http://www.iitg.ernet.in HTTP/1.0
+
+
+
+
+
+in here
+NEW BUFFER!!
+GET / HTTP/1.0
+Host: www.iitg.ernet.in
+
+
+
+45
+0
+server: connecting to 202.141.80.6
+Send :45
+27913
+27913

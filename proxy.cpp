@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
 		//cout << "after accept" << endl;
 		if (new_fd == -1) {
 			perror("accept");
-			cout << "Here sir" << endl;
+			
 			//continue;
 		}
 		char buf[512];
@@ -160,6 +160,7 @@ int main(int argc, char *argv[])
 		char *port;
 		port=(char*)malloc(10);
 		strcpy(port, "80");
+	
 		int pr = parse_req(buf, byte_count, newbuf, newind, port, host);
 		k=0;
 		printf("NEW BUFFER!!\n");
@@ -332,74 +333,101 @@ int get_req_from_client(int new_fd, char *buf, int buf_size)
 
 int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *host)
 {
-	if(strncmp("GET", buf, 3)!=0)
+	char *word;
+	word = (char*)malloc(5000);
+	int ind=0;
+	int word_size=getnextword(buf, max, ind, word);
+	if(word_size!=3  || strncmp("GET", word, 3)!=0)
 	{
 		//Throw up error !
 	}
-	int ind=3;
 	//int fwd=0;
 
-	if(!isspace(buf[ind]))
-	{
-		//bad request
-	}
-	ind++;
-	char *word;
-	word = (char*)malloc(1000);
+	
+	char *path;
+	path=(char*)malloc(1000);
 
-	int word_size=getnextword(buf, max, ind, word);
+	word_size=getnextword(buf, max, ind, word);
 	int k=0;
-	while(k<word_size)
+	/*while(k<word_size)
 	{
 		printf("%c", word[k]);
 		k++;
 	}
 
-	printf("\n");
-	cout << "Checkpoint1" << endl;
+	printf("\n");*/
+	//cout << "Checkpoint1" << endl;
 	bool is_url=true;
+	bool is_port=false;
 	
-	char *path;
 	int hostlen;
-	
-	cout << "Checkpoint5" << endl;
-	if(strncmp(word, "http", 4)==0)
+	int d=0;
+	//cout << "Checkpoint5" << endl;
+	if(strncmp(word, "http://", 7)==0)
 	{
-		cout << "Checkpoint8" << endl;
-		cout << strlen(word) << endl;
+		//cout << "Checkpoint8" << endl;
+		//cout << strlen(word) << endl;
 		is_url=true;
-		cout << strncpy(host, word+7, strlen(word)-7) << endl;
-		hostlen=word_size-7;
-		cout << "Checkpoint3" << endl;
+		d=7;
+		hostlen=0;
+		while(word[d]!='/' && word[d]!=':' && d<word_size)
+		{
+			strncat(host, word+d, 1);
+			d++;
+			hostlen++;
+		}
+		if(word[d]==':')
+		{
+			d++;
+			is_port=true;
+			strcpy(port, "\0");
+			while(word[d]!='/' && d<word_size)
+			{
+				strncat(port, word+d, 1);
+				d++;
+			}
+		}
+		if(word[d]=='/')
+		{
+			while(d<word_size)
+			{
+				strncat(path, word+d, 1);
+				d++;
+			}
+
+		}
+		else
+		{
+			strcat(path, "/");
+		}		//cout << strncpy(host, word+7, strlen(word)-7) << endl;
+		//hostlen=word_size-7;
+		//cout << "Checkpoint3" << endl;
 
 	}
 	else if (word[0]=='/')
 	{
-		cout << "Checkpoint10" << endl;
+		//cout << "Checkpoint10" << endl;
 		is_url=false;
-		strcpy(path, word);
+		strncpy(path, word, word_size);
 	}
 	else
 	{
-		cout << "Checkpoint6" << endl;
+		
 	}
-	cout << "Checkpoint2" << endl;
+	//cout << "Checkpoint2" << endl;
 	//ind+=word_size;
-	if(!isspace(buf[ind]))
-	{
-		//bad request
-	}
+	
 	word_size=getnextword(buf, max, ind, word);
 	//ind+=word_size;
-	k=0;
-	while(k<word_size)
+	//k=0;
+	/*while(k<word_size)
 	{
 		printf("%c", word[k]);
 		k++;
 	}
-
-	printf("\n");
-	if(strcmp("HTTP/1.0", word)==0 || strcmp("HTTP/1.1", word)==0 || strcmp("HTTP/0.9", word)==0)
+*/
+	//printf("\n");
+	if(strncmp("HTTP/1.0", word, word_size)==0 || strncmp("HTTP/1.1", word, word_size)==0 || strncmp("HTTP/0.9", word, word_size)==0)
 	{
 		//ok
 	}
@@ -413,15 +441,34 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 	{
 		word_size=getnextword(buf, max, ind, word);
 		//ind+=word_size;
-		if(strcmp("Host:", word)!=0)
+		if(strncmp("Host:", word, word_size)!=0)
 		{
 			//bad request
 		}
 		else
 		{
-			word_size=getnextword(buf, max, ind, word);
-			strcpy(host, word);
-			hostlen=word_size;
+			d=0;
+			hostlen=0;
+			word_size=getnextword(buf, max, ind, word); 
+			while(word[d]!=':' && d<word_size)
+			{
+				strncat(host, word+d, 1);
+				d++;
+				hostlen++;
+			}
+			if(word[d]==':')
+			{
+				d++;
+				is_port=true;
+				strcpy(port, "\0");
+			}
+			while(d<word_size)
+			{
+				strncat(port, word+d, 1);
+				d++;
+			}
+			//=word_size;
+			//cout << host << endl;
 		}
 	}
 
@@ -429,18 +476,48 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 	//int newind=0;
 	
 
-	strcat(newbuf, "GET / HTTP/1.0\r\nHost: ");
-	newind=24;
+	strcat(newbuf, "GET ");
+	strcat(newbuf, path);
+	strcat(newbuf, " ");
+
+	strcat(newbuf, "HTTP/1.0\r\nHost: ");
+	strcat(newbuf, host);
+	if(is_port)
+	{
+		strcat(newbuf, ":");
+		strcat(newbuf, port);
+		/*ind+=strlen(port);
+		ind++;*/
+		
+	}
+	strcat(newbuf, "\r\n");
+	//strcat(newbuf, "test");
+	//strcat(newbuf, "test2");
+	//newind=strlen(newbuf);
+	//strcat(newbuf, "strcat1");
+	/*cout << newind << endl;
+	k=0;
+	while(k<newind)
+	{
+		printf("%c", newbuf[k]);
+		k++;
+	}
+	printf("\n");
+	char x, c, v;
+	cin >> x >> c >> v;
 	strcat(newbuf, host);
 	newind+=hostlen;
-	strcat(newbuf, "\r\n");
+	
 	newind+=2;
-	ind++;
+	ind++;*/
+	ind+=2;
 	while(ind<max)
 	{
-		cout << ind << endl;
-		if(buf[ind]=='\r' && buf[ind+1]=='\n')
+		cout << "in here" << endl;
+		//cout << ind << endl;
+		if(buf[ind]=='\r' || buf[ind]=='\n')
 		{
+			strcat(newbuf, "\r\n");
 			break;
 		}
 		word_size=getnextword(buf, max, ind, word);
@@ -454,17 +531,17 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 		}
 		cout << "Word" << word << endl;
 		strncat(newbuf, word, word_size);
-		newind+=word_size;
+		//newind+=word_size;
 		strcat(newbuf, " ");
-		newind++;
+		//newind++;
 		ind++;
 		cout << word << endl;
 		cout << ind << endl;
 		//ind=0;
-		while(!(buf[ind]=='\r' && buf[ind+1]=='\n'))
+		while(!(buf[ind]=='\r' || buf[ind+1]=='\n'))
 		{	//cout << buf[ind];
 			strncat(newbuf, buf+ind, 1);
-			newind++;
+			//newind++;
 			ind++;
 
 		}
@@ -472,8 +549,8 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 		ind+=2;
 	}
 	strcat(newbuf, "\r\n");
-
-
+	//strcat(newbuf, "strcat2");
+	newind=strlen(newbuf);
 	return 0;
 
 
