@@ -236,13 +236,16 @@ int main(int argc, char *argv[])
 		}
 		
 		k=0;
-		while(k<cur)
-		{
-			printf("%c", recvbuf[k]);
-			k++;
-		}
-		printf("\n");
+		
 		cout << cur << endl;
+		int datasize=cur;
+		cur=0;
+		while((bytes_sent=send(new_fd, recvbuf+cur, datasize-cur, 0))>0)
+		{
+			cur+=bytes_sent;
+		}
+		cout << cur << endl;
+
 		close(new_fd);
 
 
