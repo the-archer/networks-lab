@@ -20,8 +20,10 @@ using namespace std;
 #define BACKLOG 10
 /*get_req from client gets the request from the connected client and stores it in buf*/
 int get_req_from_client(int new_fd, char *buf, int buf_size); 
-int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char* host);
+int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char* host, int new_fd);
 int getnextword(char* buf, int max, int& ind, char *word);
+void send_bad_req_error(int new_fd);
+void send_not_implem_error(int new_fd);
 
 void sigchld_handler(int s)
 {
@@ -111,7 +113,7 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	//cout << "Proxy server running..." << endl;
+	cout << "Proxy server running..." << endl;
 	while(1) {  
 
 		sin_size = sizeof their_addr;
@@ -132,7 +134,7 @@ int main(int argc, char *argv[])
 		byte_count=get_req_from_client(new_fd, buf, sizeof buf);
 		if(byte_count==-1)
 		{
-			fprintf(stderr, "Unable to get data. Disconnecting...\n");
+			fprintf(stderr, "Unable to get data. Disconnected.\n");
 			continue;
 		}
 		//
@@ -157,13 +159,13 @@ int main(int argc, char *argv[])
 		char *newbuf;
 		if((newbuf=(char*)malloc(50000))==NULL)
 		{
-			fprintf(stderr, "Unable to allocate newbuf. Disconnecting...\n");
+			fprintf(stderr, "Unable to allocate newbuf. Disconnected.\n");
 			continue;
 		}
 		char *host;
 		if((host=(char*)malloc(200))==NULL)
 		{
-			fprintf(stderr, "Unable to allocate host. Disconnecting...\n");
+			fprintf(stderr, "Unable to allocate host. Disconnected.\n");
 			continue;
 
 		}
@@ -172,12 +174,17 @@ int main(int argc, char *argv[])
 		char *port;
 		if((port=(char*)malloc(10))==NULL)
 		{
-			fprintf(stderr, "Unable to allocate port. Disconnecting...\n");
+			fprintf(stderr, "Unable to allocate port. Disconnected.\n");
 			continue;
 		}
 		strcpy(port, "80");
 	
-		int pr = parse_req(buf, byte_count, newbuf, newind, port, host);
+		int pr = parse_req(buf, byte_count, newbuf, newind, port, host, new_fd);
+		if(pr==-1)
+		{
+			fprintf(stderr, "Error in request. Disconnected.\n");
+			continue;
+		}
 		//k=0;
 		//printf("NEW BUFFER!!\n");
 		/*while(k<newind)
@@ -186,7 +193,7 @@ int main(int argc, char *argv[])
 			k++;
 		}*/
 		//printf("\n");
-		cout << newind << endl;
+		//cout << newind << endl;
 
 		int sockfd2;
 		struct addrinfo hints2, *servinfo2, *p2;
@@ -260,7 +267,7 @@ int main(int argc, char *argv[])
 		char *recvbuf;
 		if((recvbuf=(char*)malloc(500000))==NULL)
 		{
-			fprintf(stderr, "Unable to allocate recvbuf. Disconnecting...\n");
+			fprintf(stderr, "Unable to allocate recvbuf. Disconnected.\n");
 			continue;
 
 		}
@@ -347,6 +354,7 @@ int get_req_from_client(int new_fd, char *buf, int buf_size)
 	if(byte_count==-1)
 	{
 		perror("Error getting request from client");
+		return -1;
 	}
 	//printf("%d\n", byte_count);
 	//printf("recv()'d %d bytes of data in buf\n", byte_count);
@@ -384,23 +392,81 @@ int get_req_from_client(int new_fd, char *buf, int buf_size)
 }
 
 
-int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *host)
+void send_bad_req_error(int new_fd)
+{
+	char error_mes[50];
+	sprintf(error_mes, "Error 400 : Bad Request\n");
+	if(send(new_fd, error_mes, strlen(error_mes), 0)==-1)
+	{
+		perror("sending req failed");
+
+	}
+	close(new_fd);
+
+	return;
+}
+
+void send_not_implem_error(int new_fd)
+{
+
+	char error_mes[50];
+	sprintf(error_mes, "Error 501 : Not Implemented\n");
+	if(send(new_fd, error_mes, strlen(error_mes), 0)==-1)
+	{
+		perror("sending req failed");
+
+	}
+
+	close(new_fd);
+
+	return;
+
+
+}
+
+
+int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *host, int new_fd)
 {
 	char *word;
 	word = (char*)malloc(5000);
 	int ind=0;
 	int word_size=getnextword(buf, max, ind, word);
+	if(word_size==0)
+	{
+		send_bad_req_error(new_fd);
+		return -1;
+	}
 	if(word_size!=3  || strncmp("GET", word, 3)!=0)
 	{
-		//Throw up error !
+		if(strncmp("POST", word, 4)!=0 || strncmp("HEAD", word, 4)!=0 )
+		{
+			send_not_implem_error(new_fd);
+		}
+		else
+		{
+			send_bad_req_error(new_fd);
+
+		}
+		return -1;
 	}
 	//int fwd=0;
 
 	
 	char *path;
-	path=(char*)malloc(1000);
+	if((path=(char*)malloc(1000))==NULL)
+	{
+
+			fprintf(stderr, "Unable to allocate path. Disconnected.\n");
+			return -1;
+	}
 
 	word_size=getnextword(buf, max, ind, word);
+	if(word_size==0)
+	{
+		send_bad_req_error(new_fd);
+		return -1;
+
+	}
 	int k=0;
 	/*while(k<word_size)
 	{
@@ -465,12 +531,15 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 	}
 	else
 	{
+		send_bad_req_error(new_fd);
+		return -1;
 		
 	}
 	//cout << "Checkpoint2" << endl;
 	//ind+=word_size;
 	
 	word_size=getnextword(buf, max, ind, word);
+
 	//ind+=word_size;
 	//k=0;
 	/*while(k<word_size)
@@ -482,11 +551,13 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 	//printf("\n");
 	if(strncmp("HTTP/1.0", word, word_size)==0 || strncmp("HTTP/1.1", word, word_size)==0 || strncmp("HTTP/0.9", word, word_size)==0)
 	{
-		//ok
+		
 	}
 	else
 	{
-		//bad request
+		send_bad_req_error(new_fd);
+		return -1;
+		
 	}
 
 
@@ -496,7 +567,8 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 		//ind+=word_size;
 		if(strncmp("Host:", word, word_size)!=0)
 		{
-			//bad request
+			send_bad_req_error(new_fd);
+			return -1;
 		}
 		else
 		{
@@ -566,7 +638,7 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 	ind+=2;
 	while(ind<max)
 	{
-		cout << "in here" << endl;
+		//cout << "in here" << endl;
 		//cout << ind << endl;
 		if(buf[ind]=='\r' || buf[ind]=='\n')
 		{
@@ -576,20 +648,21 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 		word_size=getnextword(buf, max, ind, word);
 		if(word[word_size-1]!=':')
 		{
-			//bad request
+			send_bad_req_error(new_fd);
+			return -1;
 			
 			
 			
 		
 		}
-		cout << "Word" << word << endl;
+		//cout << "Word" << word << endl;
 		strncat(newbuf, word, word_size);
 		//newind+=word_size;
 		strcat(newbuf, " ");
 		//newind++;
 		ind++;
-		cout << word << endl;
-		cout << ind << endl;
+		//cout << word << endl;
+		//cout << ind << endl;
 		//ind=0;
 		while(!(buf[ind]=='\r' || buf[ind+1]=='\n'))
 		{	//cout << buf[ind];
