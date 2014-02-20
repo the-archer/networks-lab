@@ -17,10 +17,9 @@ using namespace std;
 
 
 
-#define BACKLOG 3
-//#define PORT "80"
-
-int get_req_from_client(int new_fd, char *buf, int buf_size);
+#define BACKLOG 10
+/*get_req from client gets the request from the connected client and stores it in buf*/
+int get_req_from_client(int new_fd, char *buf, int buf_size); 
 int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char* host);
 int getnextword(char* buf, int max, int& ind, char *word);
 
@@ -112,7 +111,7 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	cout << "Proxy server running..." << endl;
+	//cout << "Proxy server running..." << endl;
 	while(1) {  
 
 		sin_size = sizeof their_addr;
@@ -122,16 +121,20 @@ int main(int argc, char *argv[])
 		if (new_fd == -1) {
 			perror("accept");
 			
-			//continue;
+			continue;
 		}
 		char buf[512];
 		inet_ntop(their_addr.ss_family,
 			get_in_addr((struct sockaddr *)&their_addr),
 			s, sizeof s);
-		printf("server: got connection from %s\n", s);
+		//printf("server: got connection from %s\n", s);
 		//printf("%d\n", sizeof buf);
 		byte_count=get_req_from_client(new_fd, buf, sizeof buf);
-		
+		if(byte_count==-1)
+		{
+			fprintf(stderr, "Unable to get data. Disconnecting...\n");
+			continue;
+		}
 		//
 
 		//
@@ -143,33 +146,46 @@ int main(int argc, char *argv[])
 		
 
 		
-		printf("recv()'d %d bytes of data in buf\n", byte_count);
-		int k=0;
+		//printf("recv()'d %d bytes of data in buf\n", byte_count);
+		/*int k=0;
 		while(k<byte_count)
 		{
 			printf("%c", buf[k]);
 			k++;
-		}
-		printf("\n");
+		}*/
+		//printf("\n");
 		char *newbuf;
-		newbuf=(char*)malloc(50000);
+		if((newbuf=(char*)malloc(50000))==NULL)
+		{
+			fprintf(stderr, "Unable to allocate newbuf. Disconnecting...\n");
+			continue;
+		}
 		char *host;
-		host=(char*)malloc(200);
+		if((host=(char*)malloc(200))==NULL)
+		{
+			fprintf(stderr, "Unable to allocate host. Disconnecting...\n");
+			continue;
+
+		}
 		int newind=0;
 
 		char *port;
-		port=(char*)malloc(10);
+		if((port=(char*)malloc(10))==NULL)
+		{
+			fprintf(stderr, "Unable to allocate port. Disconnecting...\n");
+			continue;
+		}
 		strcpy(port, "80");
 	
 		int pr = parse_req(buf, byte_count, newbuf, newind, port, host);
-		k=0;
-		printf("NEW BUFFER!!\n");
-		while(k<newind)
+		//k=0;
+		//printf("NEW BUFFER!!\n");
+		/*while(k<newind)
 		{
 			printf("%c", newbuf[k]);
 			k++;
-		}
-		printf("\n");
+		}*/
+		//printf("\n");
 		cout << newind << endl;
 
 		int sockfd2;
@@ -213,40 +229,70 @@ int main(int argc, char *argv[])
 
 		inet_ntop(p2->ai_family, get_in_addr((struct sockaddr *)p2->ai_addr),
 			s, sizeof s);
-		printf("server: connecting to %s\n", s);
+		//printf("server: connecting to %s\n", s);
 
 		freeaddrinfo(servinfo2); // all done with this structure
 
 
-		int bytes_sent=send(sockfd2, newbuf, newind, 0);
+		int bytes_sent=0;
+		//int suc_sent=0;
+		bytes_sent=send(sockfd2, newbuf, newind, 0);
+		if(bytes_sent==-1)
+		{
+			perror("sending req to server failed");
+			continue;
+		}
 
-		cout << "Send :" << bytes_sent << endl;
+		while(bytes_sent<newind)
+		{
+			bytes_sent+=send(sockfd2, newbuf+bytes_sent, newind-bytes_sent, 0);
+			if(bytes_sent==-1)
+			{
+				perror("sending req to server failed");
+				continue;
+			}
+		}
+
+		//cout << "Send :" << bytes_sent << endl;
 		//int srs = send_req_to_server()
 		//send_req_to_server()
 		int numbytes;
 		char *recvbuf;
-		recvbuf=(char*)malloc(500000);
+		if((recvbuf=(char*)malloc(500000))==NULL)
+		{
+			fprintf(stderr, "Unable to allocate recvbuf. Disconnecting...\n");
+			continue;
+
+		}
 		int cur=0;
 		while((numbytes = recv(sockfd2, recvbuf+cur, 499999-cur, 0)) > 0) {
+			
 			cur+=numbytes;   
 
 		}
-		if (numbytes==-1)
+		if(numbytes==-1)
 		{
-			cout << "error" << endl;
+			perror("receiving data from server failed");
+			continue;
 		}
 		
-		k=0;
 		
-		cout << cur << endl;
+		
+		
+		//cout << cur << endl;
 		int datasize=cur;
 		cur=0;
 		while((bytes_sent=send(new_fd, recvbuf+cur, datasize-cur, 0))>0)
 		{
+			
 			cur+=bytes_sent;
 		}
-		cout << cur << endl;
-
+		//cout << cur << endl;
+		if(bytes_sent==-1)
+		{
+				perror("sending data back to client failed");
+				//break;
+		}
 		close(new_fd);
 
 
@@ -289,13 +335,20 @@ int get_req_from_client(int new_fd, char *buf, int buf_size)
 	bool end=false;
 	bool flag=false;
 	int cur_count=0;
+	
 	//char buf[512];
 	while(!end)
 	{
 
+	
+
 
 	int byte_count = recv(new_fd, buf+cur_count, buf_size, 0);
-	printf("%d\n", byte_count);
+	if(byte_count==-1)
+	{
+		perror("Error getting request from client");
+	}
+	//printf("%d\n", byte_count);
 	//printf("recv()'d %d bytes of data in buf\n", byte_count);
 		int k=0;
 		while(k<byte_count)
@@ -323,7 +376,7 @@ int get_req_from_client(int new_fd, char *buf, int buf_size)
 
 		}
 		cur_count+=byte_count;
-		printf("\n");
+		//printf("\n");
 	}	
 	return cur_count;
 
