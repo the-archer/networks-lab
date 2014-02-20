@@ -1,3 +1,10 @@
+/* Assignment 2 : HTTP Proxy
+
+Simrat Singh Chhabra
+Roll No : 11010165
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -17,13 +24,23 @@ using namespace std;
 
 
 
-#define BACKLOG 10
+#define BACKLOG 10 // how many pending connections queue will hold
+
 /*get_req from client gets the request from the connected client and stores it in buf*/
 int get_req_from_client(int new_fd, char *buf, int buf_size); 
+
+/*parses the request from the client and checks for incorrect syntax or methode which are not implemented*/
 int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char* host, int new_fd);
+
+/*gets the next word ignoring whitespace (used while parsing the request)*/
 int getnextword(char* buf, int max, int& ind, char *word);
+
+/*sends a Bad Request error message to the client*/
 void send_bad_req_error(int new_fd);
+
+/*sends a Not Implemented error message to the client*/
 void send_not_implem_error(int new_fd);
+
 
 void sigchld_handler(int s)
 {
@@ -50,9 +67,9 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "usage: ./proxy portno\n");
 		exit(1);
 	}
-	int sockfd, new_fd;
+	int sockfd, new_fd; // listen on sock_fd, new connection on new_fd
 	struct addrinfo hints, *servinfo, *p;
-	struct sockaddr_storage their_addr; 
+	struct sockaddr_storage their_addr; // connector's address information
 	socklen_t sin_size;
 	struct sigaction sa;
 	int yes=1;
@@ -63,13 +80,13 @@ int main(int argc, char *argv[])
 	memset(&hints, 0, sizeof hints);
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_flags = AI_PASSIVE; // use my IP
+	hints.ai_flags = AI_PASSIVE; // use own IP
 	int byte_count;
 	if ((rv = getaddrinfo(NULL, argv[1], &hints, &servinfo)) != 0) {
 		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
 		return 1;
 	}
-
+		/* loop through all the results and bind to the first one possible*/
 	for(p = servinfo; p != NULL; p = p->ai_next) {
 		if ((sockfd = socket(p->ai_family, p->ai_socktype,
 				p->ai_protocol)) == -1) {
@@ -97,7 +114,7 @@ int main(int argc, char *argv[])
 		return 2;
 	}
 
-	freeaddrinfo(servinfo); // all done with this structure
+	freeaddrinfo(servinfo); 
 
 	if (listen(sockfd, BACKLOG) == -1) {
 		perror("listen");
@@ -117,45 +134,28 @@ int main(int argc, char *argv[])
 	while(1) {  
 
 		sin_size = sizeof their_addr;
-		//cout << "before accept" << endl;
+		
+		/*Accept an incoming connection on a listening socket (new_fd)*/
 		new_fd = accept(sockfd, (struct sockaddr *)&their_addr, &sin_size);
-		//cout << "after accept" << endl;
+
+		
 		if (new_fd == -1) {
 			perror("accept");
 			
 			continue;
 		}
-		char buf[512];
+		char buf[5000]; /*buf will store the raw request received from client*/
 		inet_ntop(their_addr.ss_family,
 			get_in_addr((struct sockaddr *)&their_addr),
 			s, sizeof s);
-		//printf("server: got connection from %s\n", s);
-		//printf("%d\n", sizeof buf);
-		byte_count=get_req_from_client(new_fd, buf, sizeof buf);
+		
+		byte_count=get_req_from_client(new_fd, buf, sizeof buf); //This function will fetch the request
 		if(byte_count==-1)
 		{
 			fprintf(stderr, "Unable to get data. Disconnected.\n");
 			continue;
 		}
-		//
-
-		//
-
-		//rec_reply_from_server()
-
-		//send_reply_to_client()
-
-		
-
-		
-		//printf("recv()'d %d bytes of data in buf\n", byte_count);
-		/*int k=0;
-		while(k<byte_count)
-		{
-			printf("%c", buf[k]);
-			k++;
-		}*/
-		//printf("\n");
+	
 		char *newbuf;
 		if((newbuf=(char*)malloc(50000))==NULL)
 		{
@@ -179,21 +179,14 @@ int main(int argc, char *argv[])
 		}
 		strcpy(port, "80");
 	
+
 		int pr = parse_req(buf, byte_count, newbuf, newind, port, host, new_fd);
 		if(pr==-1)
 		{
 			fprintf(stderr, "Error in request. Disconnected.\n");
 			continue;
 		}
-		//k=0;
-		//printf("NEW BUFFER!!\n");
-		/*while(k<newind)
-		{
-			printf("%c", newbuf[k]);
-			k++;
-		}*/
-		//printf("\n");
-		//cout << newind << endl;
+		
 
 		int sockfd2;
 		struct addrinfo hints2, *servinfo2, *p2;
@@ -202,15 +195,14 @@ int main(int argc, char *argv[])
 		hints2.ai_family = AF_UNSPEC;
 		hints2.ai_socktype = SOCK_STREAM;
 		int rv2;
-		//char* finalport;
-		//finalport=(char*)malloc(10);
-		//cout << port;
+		
+		//Getting the info of the server (stored in host)
 		if ((rv2 = getaddrinfo(host, port, &hints2, &servinfo2)) != 0) {
 		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv2 ));
 		return 1;
 		}
 
-		cout << rv2 << endl;
+		
 
 		// loop through all the results and connect to the first we can
 		for(p2 = servinfo2; p2 != NULL; p2 = p2->ai_next) {
@@ -236,13 +228,12 @@ int main(int argc, char *argv[])
 
 		inet_ntop(p2->ai_family, get_in_addr((struct sockaddr *)p2->ai_addr),
 			s, sizeof s);
-		//printf("server: connecting to %s\n", s);
+		
 
-		freeaddrinfo(servinfo2); // all done with this structure
-
+		freeaddrinfo(servinfo2); 
 
 		int bytes_sent=0;
-		//int suc_sent=0;
+		/*sending the parsed request to the server*/
 		bytes_sent=send(sockfd2, newbuf, newind, 0);
 		if(bytes_sent==-1)
 		{
@@ -260,9 +251,7 @@ int main(int argc, char *argv[])
 			}
 		}
 
-		//cout << "Send :" << bytes_sent << endl;
-		//int srs = send_req_to_server()
-		//send_req_to_server()
+	
 		int numbytes;
 		char *recvbuf;
 		if((recvbuf=(char*)malloc(500000))==NULL)
@@ -272,6 +261,7 @@ int main(int argc, char *argv[])
 
 		}
 		int cur=0;
+		/* receiving reply from the server and storing it into recvbuf*/
 		while((numbytes = recv(sockfd2, recvbuf+cur, 499999-cur, 0)) > 0) {
 			
 			cur+=numbytes;   
@@ -286,50 +276,25 @@ int main(int argc, char *argv[])
 		
 		
 		
-		//cout << cur << endl;
+		
 		int datasize=cur;
 		cur=0;
+		/* sending the data received from the server as it is to the client*/
 		while((bytes_sent=send(new_fd, recvbuf+cur, datasize-cur, 0))>0)
 		{
 			
 			cur+=bytes_sent;
 		}
-		//cout << cur << endl;
+		
 		if(bytes_sent==-1)
 		{
 				perror("sending data back to client failed");
-				//break;
+				
 		}
 		close(new_fd);
 
 
-		/*printf("server: got connection from %s\n", s);
-		if (send(new_fd, "Hello, world!", 13, 0) == -1)
-				perror("send");
-		*/	
-			//char* temp;
-			
-
-			/*scanf("%s", temp);
-			if (send(new_fd, temp, strlen(temp), 0) == -1)
-				perror("send");
-			
-
-			close(new_fd);
-			*///exit(0);
-
-
-		/*if (!fork()) { // this is the child process
-			close(sockfd); // child doesn't need the listener
 		
-
-
-			if (send(new_fd, "Hello, world!", 13, 0) == -1)
-				perror("send");
-			close(new_fd);
-			exit(0);
-		}
-		close(new_fd);  // parent doesn't need this*/
 	}
 
 
@@ -343,33 +308,33 @@ int get_req_from_client(int new_fd, char *buf, int buf_size)
 	bool flag=false;
 	int cur_count=0;
 	
-	//char buf[512];
+	
 	while(!end)
 	{
 
 	
 
-
+	/*receiving request from client*/
 	int byte_count = recv(new_fd, buf+cur_count, buf_size, 0);
-	if(byte_count==-1)
+	if(byte_count<=0)
 	{
 		perror("Error getting request from client");
 		return -1;
 	}
-	//printf("%d\n", byte_count);
-	//printf("recv()'d %d bytes of data in buf\n", byte_count);
+	
 		int k=0;
 		while(k<byte_count)
 		{
 			if(buf[k+cur_count]=='\r' && buf[k+1+cur_count]=='\n')
 			{
-				//printf("here\n");
+				
 				if(flag)
 				{
 					end=true;
-					//cout << "end" << endl;
+					/*this breaks out when it sees 2 consecutive <CRLF>*/
+					
 				}
-				//cout << "flag" << endl;
+			
 				flag=true;
 
 				break;
@@ -379,12 +344,12 @@ int get_req_from_client(int new_fd, char *buf, int buf_size)
 			{
 				flag=false;
 			}
-			//printf("%c", buf[k]);
+		
 			k++;
 
 		}
 		cur_count+=byte_count;
-		//printf("\n");
+		
 	}	
 	return cur_count;
 
@@ -449,9 +414,8 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 		}
 		return -1;
 	}
-	//int fwd=0;
 
-	
+	/* path stores the absolute or relative path given by the client*/
 	char *path;
 	if((path=(char*)malloc(1000))==NULL)
 	{
@@ -468,24 +432,16 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 
 	}
 	int k=0;
-	/*while(k<word_size)
-	{
-		printf("%c", word[k]);
-		k++;
-	}
-
-	printf("\n");*/
-	//cout << "Checkpoint1" << endl;
+	
 	bool is_url=true;
 	bool is_port=false;
 	
 	int hostlen;
 	int d=0;
-	//cout << "Checkpoint5" << endl;
+	
 	if(strncmp(word, "http://", 7)==0)
 	{
-		//cout << "Checkpoint8" << endl;
-		//cout << strlen(word) << endl;
+		
 		is_url=true;
 		d=7;
 		hostlen=0;
@@ -518,14 +474,13 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 		else
 		{
 			strcat(path, "/");
-		}		//cout << strncpy(host, word+7, strlen(word)-7) << endl;
-		//hostlen=word_size-7;
-		//cout << "Checkpoint3" << endl;
+		}		
+		
 
 	}
 	else if (word[0]=='/')
 	{
-		//cout << "Checkpoint10" << endl;
+		
 		is_url=false;
 		strncpy(path, word, word_size);
 	}
@@ -535,20 +490,10 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 		return -1;
 		
 	}
-	//cout << "Checkpoint2" << endl;
-	//ind+=word_size;
 	
 	word_size=getnextword(buf, max, ind, word);
 
-	//ind+=word_size;
-	//k=0;
-	/*while(k<word_size)
-	{
-		printf("%c", word[k]);
-		k++;
-	}
-*/
-	//printf("\n");
+
 	if(strncmp("HTTP/1.0", word, word_size)==0 || strncmp("HTTP/1.1", word, word_size)==0 || strncmp("HTTP/0.9", word, word_size)==0)
 	{
 		
@@ -564,7 +509,7 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 	if(!is_url)
 	{
 		word_size=getnextword(buf, max, ind, word);
-		//ind+=word_size;
+		
 		if(strncmp("Host:", word, word_size)!=0)
 		{
 			send_bad_req_error(new_fd);
@@ -592,14 +537,12 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 				strncat(port, word+d, 1);
 				d++;
 			}
-			//=word_size;
-			//cout << host << endl;
+			
 		}
 	}
 
 	
-	//int newind=0;
-	
+	/*new buf stores the modified parsed request*/
 
 	strcat(newbuf, "GET ");
 	strcat(newbuf, path);
@@ -611,35 +554,15 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 	{
 		strcat(newbuf, ":");
 		strcat(newbuf, port);
-		/*ind+=strlen(port);
-		ind++;*/
+		
 		
 	}
 	strcat(newbuf, "\r\n");
-	//strcat(newbuf, "test");
-	//strcat(newbuf, "test2");
-	//newind=strlen(newbuf);
-	//strcat(newbuf, "strcat1");
-	/*cout << newind << endl;
-	k=0;
-	while(k<newind)
-	{
-		printf("%c", newbuf[k]);
-		k++;
-	}
-	printf("\n");
-	char x, c, v;
-	cin >> x >> c >> v;
-	strcat(newbuf, host);
-	newind+=hostlen;
 	
-	newind+=2;
-	ind++;*/
 	ind+=2;
 	while(ind<max)
 	{
-		//cout << "in here" << endl;
-		//cout << ind << endl;
+	
 		if(buf[ind]=='\r' || buf[ind]=='\n')
 		{
 			strcat(newbuf, "\r\n");
@@ -655,19 +578,17 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 			
 		
 		}
-		//cout << "Word" << word << endl;
+		
 		strncat(newbuf, word, word_size);
-		//newind+=word_size;
+		
 		strcat(newbuf, " ");
-		//newind++;
+		
 		ind++;
-		//cout << word << endl;
-		//cout << ind << endl;
-		//ind=0;
+		
 		while(!(buf[ind]=='\r' || buf[ind+1]=='\n'))
-		{	//cout << buf[ind];
+		{	
 			strncat(newbuf, buf+ind, 1);
-			//newind++;
+		
 			ind++;
 
 		}
@@ -675,7 +596,7 @@ int parse_req(char *buf, int max, char *newbuf, int& newind, char* port, char *h
 		ind+=2;
 	}
 	strcat(newbuf, "\r\n");
-	//strcat(newbuf, "strcat2");
+	
 	newind=strlen(newbuf);
 	return 0;
 
@@ -697,13 +618,7 @@ int getnextword(char* buf, int max, int& ind, char *word)
 	int end=ind;
 
 	strncpy(word, buf+start, end-start);
-	// cout << "ingetnextword" << endl;
-	// int k=0	;
-	// while(k<(end-start))
-	// {
-	// 	printf("%c", word[k]);
-	// 	k++;
-	// }
+	
 	cout << endl;
 	return end-start;
 }
