@@ -21,7 +21,7 @@ using namespace std;
 
 
 int get_req_from_client(int new_fd, char *buf, int buf_size);
-int parse_req(char *buf, int max, char *newbuf, int& newind);
+int parse_req(char *buf, int max, char *newbuf, int& newind, int& port);
 int getnextword(char* buf, int max, int& ind, char *word);
 
 void sigchld_handler(int s)
@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
 		
 		//
 
-		//send_req_to_server()
+		//
 
 		//rec_reply_from_server()
 
@@ -154,7 +154,9 @@ int main(int argc, char *argv[])
 		char *newbuf;
 		newbuf=(char*)malloc(50000);
 		int newind=0;
-		int pr = parse_req(buf, byte_count, newbuf, newind);
+
+		int port=80;
+		int pr = parse_req(buf, byte_count, newbuf, newind, port);
 		k=0;
 		printf("NEW BUFFER!!\n");
 		while(k<newind)
@@ -163,6 +165,10 @@ int main(int argc, char *argv[])
 			k++;
 		}
 		printf("\n");
+		cout << newind << endl;
+
+		int srs = send_req_to_server()
+		send_req_to_server()
 
 		close(new_fd);
 		/*printf("server: got connection from %s\n", s);
@@ -246,7 +252,7 @@ int get_req_from_client(int new_fd, char *buf, int buf_size)
 }
 
 
-int parse_req(char *buf, int max, char *newbuf, int& newind)
+int parse_req(char *buf, int max, char *newbuf, int& newind, int& port)
 {
 	if(strncmp("GET", buf, 3)!=0)
 	{
@@ -349,7 +355,7 @@ int parse_req(char *buf, int max, char *newbuf, int& newind)
 	newind=24;
 	strcat(newbuf, host);
 	newind+=hostlen;
-	strcat(newbuf+newind, "\r\n");
+	strcat(newbuf, "\r\n");
 	newind+=2;
 	ind++;
 	while(ind<max)
