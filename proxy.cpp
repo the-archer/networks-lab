@@ -217,11 +217,35 @@ int main(int argc, char *argv[])
 		freeaddrinfo(servinfo2); // all done with this structure
 
 
+		int bytes_sent=send(sockfd2, newbuf, newind, 0);
 
+		cout << "Send :" << bytes_sent << endl;
 		//int srs = send_req_to_server()
 		//send_req_to_server()
+		int numbytes;
+		char *recvbuf;
+		recvbuf=(char*)malloc(500000);
+		int cur=0;
+		while((numbytes = recv(sockfd2, recvbuf+cur, 499999-cur, 0)) > 0) {
+			cur+=numbytes;   
 
+		}
+		if (numbytes==-1)
+		{
+			cout << "error" << endl;
+		}
+		
+		k=0;
+		while(k<cur)
+		{
+			printf("%c", recvbuf[k]);
+			k++;
+		}
+		printf("\n");
+		cout << cur << endl;
 		close(new_fd);
+
+
 		/*printf("server: got connection from %s\n", s);
 		if (send(new_fd, "Hello, world!", 13, 0) == -1)
 				perror("send");
