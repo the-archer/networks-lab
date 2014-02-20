@@ -347,34 +347,47 @@ int parse_req(char *buf, int max, char *newbuf, int& newind)
 
 	strcat(newbuf, "GET / HTTP/1.0\r\nHost: ");
 	newind=24;
-	strcat(newbuf+24, host);
+	strcat(newbuf, host);
 	newind+=hostlen;
 	strcat(newbuf+newind, "\r\n");
 	newind+=2;
+	ind++;
 	while(ind<max)
 	{
 		cout << ind << endl;
-		word_size=getnextword(buf, max, ind, word);
-		if(word[word_size-1]==':')
+		if(buf[ind]=='\r' && buf[ind+1]=='\n')
 		{
-			strcat(newbuf+newind, word);
-			newind+=word_size;
-			strcat(newbuf+newind, " ");
-			newind++;
-			
-			word_size=getnextword(buf, max, ind, word);
-			strcat(newbuf+newind, word);
-			newind+=word_size;
-			strcat(newbuf+newind, "\r\n");
-			newind+=2;
+			break;
 		}
-		else
+		word_size=getnextword(buf, max, ind, word);
+		if(word[word_size-1]!=':')
 		{
 			//bad request
+			
+			
+			
+		
 		}
+		cout << "Word" << word << endl;
+		strncat(newbuf, word, word_size);
+		newind+=word_size;
+		strcat(newbuf, " ");
+		newind++;
+		ind++;
+		cout << word << endl;
+		cout << ind << endl;
+		//ind=0;
+		while(!(buf[ind]=='\r' && buf[ind+1]=='\n'))
+		{	//cout << buf[ind];
+			strncat(newbuf, buf+ind, 1);
+			newind++;
+			ind++;
 
+		}
+		strcat(newbuf, "\r\n");
+		ind+=2;
 	}
-	strcat(newbuf +newind, "\r\n");
+	strcat(newbuf, "\r\n");
 
 
 	return 0;
@@ -397,13 +410,13 @@ int getnextword(char* buf, int max, int& ind, char *word)
 	int end=ind;
 
 	strncpy(word, buf+start, end-start);
-	cout << "ingetnextword" << endl;
-	int k=0	;
-	while(k<(end-start))
-	{
-		printf("%c", word[k]);
-		k++;
-	}
+	// cout << "ingetnextword" << endl;
+	// int k=0	;
+	// while(k<(end-start))
+	// {
+	// 	printf("%c", word[k]);
+	// 	k++;
+	// }
 	cout << endl;
 	return end-start;
 }
