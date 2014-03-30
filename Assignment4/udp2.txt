@@ -1,0 +1,12 @@
+No.     Time           Source                Destination           Protocol Length Info
+   1335 10.650941000   fe80::7c48:58e8:4860:ed7c ff02::1:3             LLMNR    84     Standard query 0x2a06  A wpad
+
+Frame 1335: 84 bytes on wire (672 bits), 84 bytes captured (672 bits) on interface 0
+Ethernet II, Src: Dell_4b:86:89 (d4:be:d9:4b:86:89), Dst: IPv6mcast_00:01:00:03 (33:33:00:01:00:03)
+Internet Protocol Version 6, Src: fe80::7c48:58e8:4860:ed7c (fe80::7c48:58e8:4860:ed7c), Dst: ff02::1:3 (ff02::1:3)
+User Datagram Protocol, Src Port: 57214 (57214), Dst Port: llmnr (5355)
+    Source port: 57214 (57214)
+    Destination port: llmnr (5355)
+    Length: 30
+    Checksum: 0xffd0 [validation disabled]
+Link-local Multicast Name Resolution (query)
