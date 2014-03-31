@@ -1,0 +1,14 @@
+No.     Time           Source                Destination           Protocol Length Info
+   1583 21.400992000   202.141.80.32         10.10.12.5            HTTP     218    HTTP/1.1 304 Not Modified 
+
+Frame 1583: 218 bytes on wire (1744 bits), 218 bytes captured (1744 bits) on interface 0
+Ethernet II, Src: 4c:4e:35:97:1e:ef (4c:4e:35:97:1e:ef), Dst: 84:70:ce:14:a5:15 (84:70:ce:14:a5:15)
+Internet Protocol Version 4, Src: 202.141.80.32 (202.141.80.32), Dst: 10.10.12.5 (10.10.12.5)
+Transmission Control Protocol, Src Port: http (80), Dst Port: 50262 (50262), Seq: 1, Ack: 451, Len: 152
+Hypertext Transfer Protocol
+    HTTP/1.1 304 Not Modified\r\n
+    Date: Sun, 30 Mar 2014 07:12:43 GMT\r\n
+    Server: Apache/2.2.15 (Red Hat)\r\n
+    Connection: close\r\n
+    ETag: "68161d-198-4f48d4220865c"\r\n
+    \r\n

@@ -1,0 +1,20 @@
+No.     Time           Source                Destination           Protocol Length Info
+   1581 21.400188000   10.10.12.5            202.141.80.32         HTTP     516    GET /~sukumar/cs349/HTTP-wireshark-file2.html HTTP/1.1 
+
+Frame 1581: 516 bytes on wire (4128 bits), 516 bytes captured (4128 bits) on interface 0
+Ethernet II, Src: 84:70:ce:14:a5:15 (84:70:ce:14:a5:15), Dst: 4c:4e:35:97:1e:ef (4c:4e:35:97:1e:ef)
+Internet Protocol Version 4, Src: 10.10.12.5 (10.10.12.5), Dst: 202.141.80.32 (202.141.80.32)
+Transmission Control Protocol, Src Port: 50262 (50262), Dst Port: http (80), Seq: 1, Ack: 1, Len: 450
+Hypertext Transfer Protocol
+    GET /~sukumar/cs349/HTTP-wireshark-file2.html HTTP/1.1\r\n
+    Host: 202.141.80.32\r\n
+    User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:26.0) Gecko/20100101 Firefox/26.0\r\n
+    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n
+    Accept-Language: en-US,en;q=0.5\r\n
+    Accept-Encoding: gzip, deflate\r\n
+    Connection: keep-alive\r\n
+    If-Modified-Since: Fri, 14 Mar 2014 08:57:23 GMT\r\n
+    If-None-Match: "68161d-198-4f48d4220865c"\r\n
+    Cache-Control: max-age=0\r\n
+    \r\n
+    [Full request URI: http://202.141.80.32/~sukumar/cs349/HTTP-wireshark-file2.html]

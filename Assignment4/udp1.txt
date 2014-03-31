@@ -1,0 +1,12 @@
+No.     Time           Source                Destination           Protocol Length Info
+   1328 10.598021000   10.10.2.42            255.255.255.255       DB-LSP-DISC 222    Dropbox LAN sync Discovery Protocol
+
+Frame 1328: 222 bytes on wire (1776 bits), 222 bytes captured (1776 bits) on interface 0
+Ethernet II, Src: Dell_9b:de:fa (14:fe:b5:9b:de:fa), Dst: Broadcast (ff:ff:ff:ff:ff:ff)
+Internet Protocol Version 4, Src: 10.10.2.42 (10.10.2.42), Dst: 255.255.255.255 (255.255.255.255)
+User Datagram Protocol, Src Port: db-lsp-disc (17500), Dst Port: db-lsp-disc (17500)
+    Source port: db-lsp-disc (17500)
+    Destination port: db-lsp-disc (17500)
+    Length: 188
+    Checksum: 0x702b [validation disabled]
+Dropbox LAN sync Discovery Protocol

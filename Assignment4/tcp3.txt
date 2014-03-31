@@ -1,0 +1,23 @@
+No.     Time           Source                Destination           Protocol Length Info
+    314 2.182661000    10.10.12.5            202.141.80.32         HTTP     1514   POST /~sukumar/cs349/lab3-1-reply.htm HTTP/1.1 
+
+Frame 314: 1514 bytes on wire (12112 bits), 1514 bytes captured (12112 bits) on interface 0
+Ethernet II, Src: 84:70:ce:14:a5:15 (84:70:ce:14:a5:15), Dst: 4c:4e:35:97:1e:ef (4c:4e:35:97:1e:ef)
+Internet Protocol Version 4, Src: 10.10.12.5 (10.10.12.5), Dst: 202.141.80.32 (202.141.80.32)
+Transmission Control Protocol, Src Port: 49481 (49481), Dst Port: http (80), Seq: 2005527223, Ack: 567553307, Len: 1448
+    Source port: 49481 (49481)
+    Destination port: http (80)
+    [Stream index: 5]
+    Sequence number: 2005527223
+    [Next sequence number: 2005528671]
+    Acknowledgment number: 567553307
+    Header length: 32 bytes
+    Flags: 0x010 (ACK)
+    Window size value: 115
+    [Calculated window size: 14720]
+    [Window size scaling factor: 128]
+    Checksum: 0x46b8 [validation disabled]
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+Hypertext Transfer Protocol
+MIME Multipart Media Encapsulation, Type: multipart/form-data, Boundary: "---------------------------9414305782045584668780082173"

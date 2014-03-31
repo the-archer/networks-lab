@@ -1,0 +1,19 @@
+No.     Time           Source                Destination           Protocol Length Info
+    312 2.180554000    202.141.80.32         10.10.12.5            TCP      74     http > 49481 [SYN, ACK] Seq=567553306 Ack=2005527223 Win=14480 Len=0 MSS=1460 SACK_PERM=1 TSval=4082042364 TSecr=228585 WS=128
+
+Frame 312: 74 bytes on wire (592 bits), 74 bytes captured (592 bits) on interface 0
+Ethernet II, Src: 4c:4e:35:97:1e:ef (4c:4e:35:97:1e:ef), Dst: 84:70:ce:14:a5:15 (84:70:ce:14:a5:15)
+Internet Protocol Version 4, Src: 202.141.80.32 (202.141.80.32), Dst: 10.10.12.5 (10.10.12.5)
+Transmission Control Protocol, Src Port: http (80), Dst Port: 49481 (49481), Seq: 567553306, Ack: 2005527223, Len: 0
+    Source port: http (80)
+    Destination port: 49481 (49481)
+    [Stream index: 5]
+    Sequence number: 567553306
+    Acknowledgment number: 2005527223
+    Header length: 40 bytes
+    Flags: 0x012 (SYN, ACK)
+    Window size value: 14480
+    [Calculated window size: 14480]
+    Checksum: 0xf5a1 [validation disabled]
+    Options: (20 bytes), Maximum segment size, SACK permitted, Timestamps, No-Operation (NOP), Window scale
+    [SEQ/ACK analysis]
