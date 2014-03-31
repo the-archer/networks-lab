@@ -1,0 +1,17 @@
+No.     Time           Source                Destination           Protocol Length Info
+    311 2.178592000    10.10.12.5            202.141.80.32         TCP      74     49481 > http [SYN] Seq=2005527222 Win=14600 Len=0 MSS=1460 SACK_PERM=1 TSval=228585 TSecr=0 WS=128
+
+Frame 311: 74 bytes on wire (592 bits), 74 bytes captured (592 bits) on interface 0
+Ethernet II, Src: 84:70:ce:14:a5:15 (84:70:ce:14:a5:15), Dst: 4c:4e:35:97:1e:ef (4c:4e:35:97:1e:ef)
+Internet Protocol Version 4, Src: 10.10.12.5 (10.10.12.5), Dst: 202.141.80.32 (202.141.80.32)
+Transmission Control Protocol, Src Port: 49481 (49481), Dst Port: http (80), Seq: 2005527222, Len: 0
+    Source port: 49481 (49481)
+    Destination port: http (80)
+    [Stream index: 5]
+    Sequence number: 2005527222
+    Header length: 40 bytes
+    Flags: 0x002 (SYN)
+    Window size value: 14600
+    [Calculated window size: 14600]
+    Checksum: 0x3d75 [validation disabled]
+    Options: (20 bytes), Maximum segment size, SACK permitted, Timestamps, No-Operation (NOP), Window scale
