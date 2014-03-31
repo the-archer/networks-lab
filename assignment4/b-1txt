@@ -1,0 +1,19 @@
+No.     Time           Source                Destination           Protocol Length Info
+    809 8.734848000    172.16.26.72          202.141.80.32         HTTP     351    GET /favicon.ico HTTP/1.1 
+
+Frame 809: 351 bytes on wire (2808 bits), 351 bytes captured (2808 bits) on interface 0
+Ethernet II, Src: AsustekC_07:c8:16 (e0:cb:4e:07:c8:16), Dst: Cisco_9d:70:00 (00:24:f9:9d:70:00)
+Internet Protocol Version 4, Src: 172.16.26.72 (172.16.26.72), Dst: 202.141.80.32 (202.141.80.32)
+Transmission Control Protocol, Src Port: 49161 (49161), Dst Port: http (80), Seq: 1, Ack: 1, Len: 285
+Hypertext Transfer Protocol
+    GET /favicon.ico HTTP/1.1\r\n
+    Host: 202.141.80.32\r\n
+    Connection: keep-alive\r\n
+    Accept: */*\r\n
+    User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.146 Safari/537.36\r\n
+    Accept-Encoding: gzip,deflate,sdch\r\n
+    Accept-Language: en-GB,en;q=0.8,en-US;q=0.6\r\n
+    \r\n
+    [Full request URI: http://202.141.80.32/favicon.ico]
+    [HTTP request 1/1]
+    [Response in frame: 811]

@@ -1,0 +1,414 @@
+HTTP/1.1 200 OK
+Date: Thu, 20 Feb 2014 17:44:59 GMT
+Server: Apache/2.2.15 (Red Hat)
+X-Powered-By: PHP/5.3.2
+Expires: Sun, 19 Nov 1978 05:00:00 GMT
+Last-Modified: Thu, 20 Feb 2014 17:44:59 GMT
+Cache-Control: store, no-cache, must-revalidate
+Cache-Control: post-check=0, pre-check=0
+Content-Type: text/html; charset=utf-8
+Set-Cookie: SESSc5afd0d108015fc7c06f4c628643d89c=n3egdgi7l7c9u82np2uqo67aa6; expires=Sat, 15-Mar-2014 21:18:19 GMT; path=/
+Connection: close
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Indian Institute of Technology Guwahati | </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!--[if lte IE 7]>
+      <style type="text/css">
+        body { behavior: url("/sites/all/modules/csshover/csshover3.htc"); } 
+      </style>
+    <![endif]-->
+<link rel="shortcut icon" href="/sites/all/themes/acquia_marina/favicon.ico" type="image/x-icon" />
+    <link type="text/css" rel="stylesheet" media="all" href="/modules/node/node.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/system/defaults.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/system/system.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/system/system-menus.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/user/user.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/ckeditor/ckeditor.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/google_cse/google_cse.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/nice_menus/nice_menus.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/nice_menus/nice_menus_default.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/report/modules/report_user/report_user.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/report/report.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/libraries/superfish/css/superfish.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/libraries/superfish/css/superfish-vertical.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/libraries/superfish/css/superfish-navbar.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/libraries/superfish/style/default.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acquia_marina/style.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acquia_marina/icons.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acquia_marina/dblog.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acquia_marina/theme_settings/fixed.css?u" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acquia_marina/theme_settings/fonts_1.css?u" />
+    <!--[if IE 7]>
+      <link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acquia_marina/ie7-fixes.css" />
+    <![endif]-->
+    <!--[if lte IE 6]>
+      <link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acquia_marina/ie6-fixes.css" />
+    <![endif]-->
+        <script type="text/javascript" src="/sites/all/modules/jquery_update/replace/jquery.min.js?u"></script>
+<script type="text/javascript" src="/misc/drupal.js?u"></script>
+<script type="text/javascript" src="/sites/all/modules/nice_menus/nice_menus.js?u"></script>
+<script type="text/javascript" src="/sites/all/libraries/superfish/jquery.hoverIntent.minified.js?u"></script>
+<script type="text/javascript" src="/sites/all/libraries/superfish/jquery.bgiframe.min.js?u"></script>
+<script type="text/javascript" src="/sites/all/libraries/superfish/superfish.js?u"></script>
+<script type="text/javascript" src="/sites/all/libraries/superfish/supersubs.js?u"></script>
+<script type="text/javascript" src="/sites/all/libraries/superfish/supposition.js?u"></script>
+<script type="text/javascript" src="/sites/all/libraries/superfish/sftouchscreen.js?u"></script>
+<script type="text/javascript" src="/sites/all/themes/acquia_marina/script.js?u"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, { "basePath": "/" });
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery(function(){
+jQuery('#superfish-1').supersubs({minWidth: 12, maxWidth: 27, extraWidth: 1}).superfish({
+animation: {opacity:'show'},
+speed: 'fast',
+autoArrows: false,
+dropShadows: false}).sftouchscreen();
+});
+//--><!]]>
+</script>
+  </head>
+
+  <body class="not-logged-in front full-node node-type-page layout-main preface-first">
+    <div id="page" class="clearfix">
+      
+              <div id="skip">
+          <a href="#main-content">Skip to Main Content</a>
+        </div>
+            <div id="header-wrapper">
+        <div id="header" class="clearfix">
+         
+	  <div id="header-search">
+                        
+<!-- start block.tpl.php -->
+<div class="block-wrapper odd">
+        
+        <div id="block-google_cse-0" class="block block-google_cse">
+                    <div class="content">
+            <form action="/search/google"  accept-charset="UTF-8" method="get" id="google-cse-searchbox-form">
+<div><input type="hidden" name="cx" id="edit-cx" value="013331782227461144551:0krvphuctau"  />
+<input type="hidden" name="cof" id="edit-cof" value="FORID:9"  />
+<div class="form-item" id="edit-query-wrapper">
+ <input type="text" maxlength="128" name="query" id="edit-query" size="15" value="" title="Enter the terms you wish to search for." class="form-text" />
+</div>
+<input type="submit" name="op" id="edit-sa" value="Search"  class="form-submit" />
+<input type="hidden" name="form_build_id" id="form-20356dc6dc207a73ea4c932fe5cf8d84" value="form-20356dc6dc207a73ea4c932fe5cf8d84"  />
+<input type="hidden" name="form_id" id="edit-google-cse-searchbox-form" value="google_cse_searchbox_form"  />
+
+</div></form>
+          </div>
+        </div>
+  
+    
+</div>
+<!-- /end block.tpl.php -->
+                      </div><!-- /header-search-->
+
+	 
+                
+          <div id="header-first">
+             
+            <div id="logo">
+              <a href="/" title="Home"><img src="/sites/default/files/acquia_marina_logo.gif" alt="Home" /></a>
+            </div>
+                                    <h1><a href="/" title="Home">Indian Institute of Technology Guwahati</a></h1>
+            <!--            -->
+          </div><!-- /header-first -->
+  
+<!--          <div id="header-middle">
+                      </div>
+          /header-middle 
+-->
+      
+          <div id="header-last">
+                        
+<!-- start block.tpl.php -->
+<div class="block-wrapper odd">
+        
+        <div id="block-block-9" class="block block-block">
+                    <div class="content">
+            <p>
+	<img alt="" src="/sites/default/files/hindi-banner.gif" /><br />
+	<img alt="" src="/sites/default/files/english-banner.gif" /><br />
+	Guwahati - 781039, INDIA</p>
+          </div>
+        </div>
+  
+    
+</div>
+<!-- /end block.tpl.php -->
+                      </div><!-- /header-last -->
+      
+        </div><!-- /header -->
+      </div><!-- /header-wrapper -->
+      
+      <div id="primary-menu-wrapper" class="clearfix">
+                <div id="primary-menu">
+          <ul class="menu"><li class="leaf first"><a href="http://www.iitg.ernet.in/hindi" title="">हिन्दी संस्करण</a></li>
+<li class="leaf"><a href="/aa" title="
+">Alumni Affairs &amp; External Relations</a></li>
+<li class="leaf"><a href="/rti" title="
+">RTI</a></li>
+<li class="leaf"><a href="/phones" title="
+">Phone Directory</a></li>
+<li class="leaf"><a href="/contactus" title="">Contact Us</a></li>
+<li class="expanded last"><a href="https://webmail.iitg.ernet.in" title="
+">Webmail</a><ul class="menu"><li class="leaf first"><a href="https://webmail.iitg.ac.in" title="
+">webmail.iitg.ac.in</a></li>
+<li class="leaf last"><a href="https://webmail.iitg.ernet.in" title="
+">webmail.iitg.ernet.in</a></li>
+</ul></li>
+</ul> 
+        </div><!-- /primary_menu -->
+              </div><!-- /primary-menu-wrapper -->
+
+      <div id="preface">
+                <div id="preface-wrapper" class="prefaces-1 clearfix">
+          
+                   <div id="preface-first" class="column">
+            
+<!-- start block.tpl.php -->
+<div class="block-wrapper odd">
+        
+        <div id="block-superfish-1" class="block block-superfish">
+                    <div class="content">
+            <ul id="superfish-1" class="sf-menu menu-iitgmainmenu sf-horizontal sf-style-default sf-total-items-8 sf-parent-items-6 sf-single-items-2"><li id="menu-291-1" class="active-trail first odd sf-item-1 sf-depth-1 sf-no-children"><a href="/" title="
+" class="sf-depth-1 active">Home</a></li><li id="menu-536-1" class="middle even sf-item-2 sf-depth-1 sf-total-children-4 sf-parent-children-0 sf-single-children-4 menuparent"><a href="/" title="" class="sf-depth-1 menuparent active">About IITG</a><ul><li id="menu-537-1" class="first odd sf-item-1 sf-depth-2 sf-no-children"><a href="/aboutus" title="" class="sf-depth-2">About Us</a></li><li id="menu-538-1" class="middle even sf-item-2 sf-depth-2 sf-no-children"><a href="/facilities/academic" title="" class="sf-depth-2">Facilities</a></li><li id="menu-539-1" class="middle odd sf-item-3 sf-depth-2 sf-no-children"><a href="/visitorsinfo" title="" class="sf-depth-2">Visitors Info</a></li><li id="menu-541-1" class="last even sf-item-4 sf-depth-2 sf-no-children"><a href="/faq" title="" class="sf-depth-2">FAQs</a></li></ul></li><li id="menu-292-1" class="middle odd sf-item-3 sf-depth-1 sf-no-children"><a href="/acad" title="
+" class="sf-depth-1">Academic</a></li><li id="menu-293-1" class="middle even sf-item-4 sf-depth-1 sf-total-children-4 sf-parent-children-0 sf-single-children-4 menuparent"><a href="/" title="
+" class="sf-depth-1 menuparent active">Administration</a><ul><li id="menu-169-1" class="first odd sf-item-1 sf-depth-2 sf-no-children"><a href="/administration/iitgadmin" title="" class="sf-depth-2">IITG Administration</a></li><li id="menu-295-1" class="middle even sf-item-2 sf-depth-2 sf-no-children"><a href="/administration/bog" title="" class="sf-depth-2">Board of Governors</a></li><li id="menu-296-1" class="middle odd sf-item-3 sf-depth-2 sf-no-children"><a href="/administration/senate" title="" class="sf-depth-2">Senate</a></li><li id="menu-297-1" class="last even sf-item-4 sf-depth-2 sf-no-children"><a href="/administration/deptheads" title="" class="sf-depth-2">Departmental Heads</a></li></ul></li><li id="menu-298-1" class="middle odd sf-item-5 sf-depth-1 sf-total-children-11 sf-parent-children-0 sf-single-children-11 menuparent"><a href="/" title="
+" class="sf-depth-1 menuparent active">Departments</a><ul><li id="menu-302-1" class="first odd sf-item-1 sf-depth-2 sf-no-children"><a href="/biotech" title="
+" class="sf-depth-2">Biotechnology</a></li><li id="menu-305-1" class="middle even sf-item-2 sf-depth-2 sf-no-children"><a href="/chemeng" title="
+" class="sf-depth-2">Chemical Engineering</a></li><li id="menu-303-1" class="middle odd sf-item-3 sf-depth-2 sf-no-children"><a href="/chem" title="
+" class="sf-depth-2">Chemistry</a></li><li id="menu-304-1" class="middle even sf-item-4 sf-depth-2 sf-no-children"><a href="/civil" title="
+" class="sf-depth-2">Civil Engineering</a></li><li id="menu-306-1" class="middle odd sf-item-5 sf-depth-2 sf-no-children"><a href="/cse" title="
+" class="sf-depth-2">Computer Science &amp; Engg.</a></li><li id="menu-307-1" class="middle even sf-item-6 sf-depth-2 sf-no-children"><a href="/design" title="
+" class="sf-depth-2">Design</a></li><li id="menu-308-1" class="middle odd sf-item-7 sf-depth-2 sf-no-children"><a href="/eee" title="
+" class="sf-depth-2">Electronics &amp; Electrical Engg.</a></li><li id="menu-309-1" class="middle even sf-item-8 sf-depth-2 sf-no-children"><a href="/hss" title="
+" class="sf-depth-2">Humanities &amp; Social Sc.</a></li><li id="menu-310-1" class="middle odd sf-item-9 sf-depth-2 sf-no-children"><a href="/maths" title="
+" class="sf-depth-2">Mathematics</a></li><li id="menu-311-1" class="middle even sf-item-10 sf-depth-2 sf-no-children"><a href="/mech" title="
+" class="sf-depth-2">Mechanical Engineering</a></li><li id="menu-312-1" class="last odd sf-item-11 sf-depth-2 sf-no-children"><a href="/phy" title="
+" class="sf-depth-2">Physics</a></li></ul></li><li id="menu-299-1" class="middle even sf-item-6 sf-depth-1 sf-total-children-6 sf-parent-children-0 sf-single-children-6 menuparent"><a href="/" title="
+" class="sf-depth-1 menuparent active">Centres</a><ul><li id="menu-317-1" class="first odd sf-item-1 sf-depth-2 sf-no-children"><a href="/cif" title="
+" class="sf-depth-2">Central Instruments Facility</a></li><li id="menu-318-1" class="middle even sf-item-2 sf-depth-2 sf-no-children"><a href="/cet" title="
+" class="sf-depth-2">Centre for Edu. Technology</a></li><li id="menu-313-1" class="middle odd sf-item-3 sf-depth-2 sf-no-children"><a href="/ceer" title="
+" class="sf-depth-2">Centre for Energy</a></li><li id="menu-314-1" class="middle even sf-item-4 sf-depth-2 sf-no-children"><a href="/env" title="
+" class="sf-depth-2">Centre for Environment</a></li><li id="menu-315-1" class="middle odd sf-item-5 sf-depth-2 sf-no-children"><a href="/nano" title="
+" class="sf-depth-2">Centre for Nanotechnology</a></li><li id="menu-316-1" class="last even sf-item-6 sf-depth-2 sf-no-children"><a href="/cc" title="
+" class="sf-depth-2">Computer and Comm. Centre</a></li></ul></li><li id="menu-300-1" class="middle odd sf-item-7 sf-depth-1 sf-total-children-11 sf-parent-children-0 sf-single-children-11 menuparent"><a href="/" title="
+" class="sf-depth-1 menuparent active">Faculty</a><ul><li id="menu-320-1" class="first odd sf-item-1 sf-depth-2 sf-no-children"><a href="/biotech/Faculty.html" title="
+" class="sf-depth-2">Biotechnology</a></li><li id="menu-323-1" class="middle even sf-item-2 sf-depth-2 sf-no-children"><a href="/chemeng/faculty.html" title="
+" class="sf-depth-2">Chemical Engineering</a></li><li id="menu-321-1" class="middle odd sf-item-3 sf-depth-2 sf-no-children"><a href="/chem/faculty.html" title="
+" class="sf-depth-2">Chemistry</a></li><li id="menu-322-1" class="middle even sf-item-4 sf-depth-2 sf-no-children"><a href="/civil/fac.htm" title="
+" class="sf-depth-2">Civil Engineering</a></li><li id="menu-324-1" class="middle odd sf-item-5 sf-depth-2 sf-no-children"><a href="http://www.iitg.ernet.in/cse/?page_id=150" title="
+" class="sf-depth-2">Computer Science &amp; Engg.</a></li><li id="menu-325-1" class="middle even sf-item-6 sf-depth-2 sf-no-children"><a href="/design/Faculty.html" title="
+" class="sf-depth-2">Design</a></li><li id="menu-326-1" class="middle odd sf-item-7 sf-depth-2 sf-no-children"><a href="/eee/fac.htm" title="
+" class="sf-depth-2">Electronics &amp; Electrical Engg.</a></li><li id="menu-327-1" class="middle even sf-item-8 sf-depth-2 sf-no-children"><a href="http://www.iitg.ac.in/hss/?page_id=13" title="
+" class="sf-depth-2">Humanities &amp; Social Sc.</a></li><li id="menu-328-1" class="middle odd sf-item-9 sf-depth-2 sf-no-children"><a href="/maths/people/faculty.php" title="
+" class="sf-depth-2">Mathematics</a></li><li id="menu-329-1" class="middle even sf-item-10 sf-depth-2 sf-no-children"><a href="/mech/faculty.php" title="
+" class="sf-depth-2">Mechanical Engineering</a></li><li id="menu-330-1" class="last odd sf-item-11 sf-depth-2 sf-no-children"><a href="/phy/node/31" title="
+" class="sf-depth-2">Physics</a></li></ul></li><li id="menu-301-1" class="last even sf-item-8 sf-depth-1 sf-total-children-12 sf-parent-children-1 sf-single-children-11 menuparent"><a href="/" title="
+" class="sf-depth-1 menuparent active">Essential Info.</a><ul><li id="menu-331-1" class="first odd sf-item-1 sf-depth-2 sf-no-children"><a href="/recruitment/index" title="" class="sf-depth-2">Recruitment Notice</a></li><li id="menu-332-1" class="middle even sf-item-2 sf-depth-2 sf-no-children"><a href="/tenders" title="" class="sf-depth-2">Tenders/NIQs</a></li><li id="menu-333-1" class="middle odd sf-item-3 sf-depth-2 sf-no-children"><a href="/research/intro" title="" class="sf-depth-2">Research</a></li><li id="menu-337-1" class="middle even sf-item-4 sf-depth-2 sf-no-children"><a href="http://www.iitg.ernet.in/placement/" title="" class="sf-depth-2">Placement</a></li><li id="menu-338-1" class="middle odd sf-item-5 sf-depth-2 sf-total-children-2 sf-parent-children-0 sf-single-children-2 menuparent"><a href="/" title="" class="sf-depth-2 menuparent active">Services</a><ul><li id="menu-339-1" class="first odd sf-item-1 sf-depth-3 sf-no-children"><a href="/cc" title="
+" class="sf-depth-3">Computer &amp; Comm. Centre</a></li><li id="menu-340-1" class="last even sf-item-2 sf-depth-3 sf-no-children"><a href="/lib" title="
+" class="sf-depth-3">Library</a></li></ul></li><li id="menu-341-1" class="middle even sf-item-6 sf-depth-2 sf-no-children"><a href="/conference-workshop" title="
+" class="sf-depth-2">Conferences/Workshops</a></li><li id="menu-344-1" class="middle odd sf-item-7 sf-depth-2 sf-no-children"><a href="/faq" title="" class="sf-depth-2">FAQ</a></li><li id="menu-343-1" class="middle even sf-item-8 sf-depth-2 sf-no-children"><a href="/visitorsinfo" title="" class="sf-depth-2">Visitors Info</a></li><li id="menu-345-1" class="middle odd sf-item-9 sf-depth-2 sf-no-children"><a href="http://www.iitg.ernet.in/acad/acadCal/academic_calander.htm" title="
+" class="sf-depth-2">Academic Calendar</a></li><li id="menu-534-1" class="middle even sf-item-10 sf-depth-2 sf-no-children"><a href="/aa/campusmap" title="" class="sf-depth-2">Campus Map</a></li><li id="menu-535-1" class="middle odd sf-item-11 sf-depth-2 sf-no-children"><a href="http://www.iitg.ernet.in/pro/internet/convo_all" title="
+" class="sf-depth-2">Convocation Speeches</a></li><li id="menu-547-1" class="last even sf-item-12 sf-depth-2 sf-no-children"><a href="/anti_ragging" title="anti_ragging" class="sf-depth-2">Anti-Ragging Affidavits</a></li></ul></li></ul>          </div>
+        </div>
+  
+    
+</div>
+<!-- /end block.tpl.php -->
+ 
+          </div><!-- /preface-first -->
+          
+<!--          
+          -->
+        </div><!-- /preface-wrapper -->
+              </div><!-- /preface -->
+
+      <div id="main-wrapper">
+        <div id="main" class="clearfix">
+          
+                  
+          
+          <div id="content-wrapper">
+
+            
+                        
+            <div id="content">
+              <a name="main-content" id="main-content"></a>
+              
+              
+              <div id="content-inner">
+                
+                              
+               <!--                 <h1 class="title">index</h1>
+                 -->
+                <div id="content-content">
+                  
+<!-- start node.tpl.php -->
+<div id="node-128" class="node odd full-node node-type-page">
+  
+  <!--
+  <div class="meta">
+        <span class="submitted">Posted Fri, 06/15/2012 - 14:50 by admin</span>
+      </div>
+-->
+
+  <div class="content">
+    <p><img alt="" src="/sites/default/files/iitg_cc_acad_admin.jpg" /></p>
+<table align="center" border="0" cellpadding="1" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 39%; vertical-align: top;">
+				<span style="color: rgb(57, 87, 87);"><strong>NEWS AND ANNOUNCEMENTS</strong></span>
+<hr />
+<ul>
+<li>
+						<strong><a href="../recruitment/facultyrecruitment"><span data-scayt_word="Advt" data-scaytid="1">Advt</span>. <span class="GRcorrect" grphrase="48723a24c6a0349e2366dc4fb32823992702966a" grtype="null" id="GRmark_48723a24c6a0349e2366dc4fb32823992702966a_for:0">for</span> Faculty positions</a></strong></li>
+<li>
+						<strong><font size="2"><a href="http://www.iitg.ernet.in/acad/MTechRefundNov2013.pdf" target="_blank" title="This external link will open in a new window"><span data-scayt_word="MTech" data-scaytid="2">MTech</span>/<span data-scayt_word="MDes" data-scaytid="3">MDes</span> fee refund status for the students who are selected for admission for July Nov 2013 session and subsequently withdrew</a></font></strong></li>
+<li>
+						<a href="http://www.iitg.ernet.in/acad/PhDAdmissionNotificationOctober2013/AdvtNotificationOctober2013.htm"><strong>Notification for January 2014 PhD Admission</strong></a></li>
+<li>
+						<a href="https://www.iitg.ernet.in/aa/er-outside%20-%20Copy/er-website/er/foreign%20students%20procedure/Final%20GUIDELINES%20FOR%20ADMISSION%20OF%20FOREIGN1.pdf"><strong>Foreign students admission guidelines at <span data-scayt_word="IITG" data-scaytid="4">IITG</span></strong></a></li>
+<li>
+						<a href="/sites/default/files/poster1.pdf"><strong>International Internship/Academic Exchange under <span data-scayt_word="MoU" data-scaytid="5">MoU</span> at <span data-scayt_word="IIT" data-scaytid="6">IIT</span> <span data-scayt_word="Guwahati" data-scaytid="7">Guwahati</span></strong></a></li>
+<li>
+						<strong><a href="http://www.iitg.ernet.in/scifac/qip/public_html/QIP-CANDIDATES.htm"><span data-scayt_word="QIP" data-scaytid="8">QIP</span> M.Tech./Ph.D. Shortlisted candidates called for interview on <span data-scayt_word="13th" data-scaytid="9">13<sup>th</sup></span> Jan 2014</a></strong></li>
+</ul>
+</td>
+<td style="width: 1%; vertical-align: top;">
+				&nbsp;</td>
+<td style="width: 39%; vertical-align: top;">
+				<strong><span style="color: rgb(47, 79, 79);">EVENTS</span></strong>
+<hr />
+				<marquee direction="up" height="310" onmouseout="this.setAttribute('scrollamount', 3, 0);" onmouseover="this.setAttribute('scrollamount', 0, 0);" scrollamount="3" scrolldelay="150">
+<ul>
+<li>
+						<a href="http://www.iitg.ernet.in/EWSB2014"><strong><span data-scayt_word="EWSB" data-scaytid="12">EWSB</span></strong> - Discussion meeting on <span data-scayt_word="EWSB" data-scaytid="13">EWSB</span> and <span data-scayt_word="Flavour" data-scaytid="14">Flavour</span> Physics, 20-22 February 2014</a></li>
+<li>
+						<a href="http://www.iitg.ernet.in/physics/fac/bhuyan/BAW2014/index.html"><strong><span data-scayt_word="BAW" data-scaytid="15">BAW</span> 2014</strong> - Belle Analysis Workshop 2014, 24 February - 4 March, 2014</a></li>
+<li>
+						<strong><span style="color: rgb(51, 121, 166);"><span data-scayt_word="HWWE" data-scaytid="16">HWWE</span> 2014 -</span></strong><span style="color: rgb(51, 121, 166);"> International Ergonomics Conference. December 01-07, 2014</span></li>
+<li>
+						<strong><a href="http://www.iitg.ernet.in/aimtdr2014/"><span data-scayt_word="AIMTDR-2014" data-scaytid="17">AIMTDR-2014</span> -</a></strong><a href="http://www.iitg.ernet.in/aimtdr2014/"> <span data-scayt_word="5th" data-scaytid="18">5th</span> International &amp; <span data-scayt_word="26th" data-scaytid="19">26th</span> All India Manufacturing Technology, Design and Research Conference, December 12-14, 2014</a></li>
+<li>
+						<a href="http://www.iitg.ernet.in/npsc2014"><strong><span data-scayt_word="NPSC-2014" data-scaytid="20">NPSC-2014</span></strong> - <span data-scayt_word="18th" data-scaytid="21">18th</span> National power System Conference, December 18-20, 2014</a></li>
+</ul>
+<p>				</p></marquee>
+<p class="rteright">
+					<strong><a href="/conference-workshop"><span style="color: rgb(0, 128, 0);">More Events</span></a></strong></p>
+</td>
+<td style="width: 1%; vertical-align: top;">
+				&nbsp;</td>
+<td style="width: 20%; vertical-align: top;">
+				<strong><span style="color: rgb(57, 87, 87);">QUICK LINKS</span></strong>
+<hr />
+<ul>
+<li>
+						<a href="../director/dirmsg.html"><strong>Message from the Director</strong></a></li>
+<li>
+						<strong><span><span><a href="../recruitment/index">Recruitment Notice</a></span></span></strong></li>
+<li>
+						<strong><a href="http://www.iitg.ernet.in/interiitsports/"><span data-scayt_word="49th" data-scaytid="23">49<sup>th</sup></span> Inter <span data-scayt_word="IIT" data-scaytid="22">IIT</span> Sports Meet - 2013</a></strong></li>
+<li>
+						<strong><a href="/campus/academics"><span data-scayt_word="JEE" data-scaytid="25">JEE</span> Admissions&nbsp;</a></strong></li>
+<li>
+						<strong><a href="aa/campusmap">Campus Map</a></strong></li>
+<li>
+						<strong><span><span><a href="../tenders">Tenders/<span data-scayt_word="NIQs" data-scaytid="27">NIQs</span></a></span></span></strong></li>
+<li>
+						<a href="http://www.iitg.ernet.in/acad/acadCal/academic_calander.htm"><strong>Academic Calendar</strong></a></li>
+<li>
+						<a href="http://www.iitg.ernet.in/acad/ForeignStudents/Foreignstudents.htm"><strong>Continuing Foreign Students</strong></a></li>
+<li>
+						<strong><a href="../../gate">GATE/JAM/<span data-scayt_word="CEED" data-scaytid="28">CEED</span></a></strong></li>
+<li>
+						<strong><a href="../../jeeadv"><span data-scayt_word="JEE" data-scaytid="26">JEE</span>(Advanced)</a></strong></li>
+<li>
+						<strong><a href="http://www.iitg.ac.in/pro/internet/newsletter">Newsletter</a></strong></li>
+<li>
+						<strong><a href="/sites/default/files/IITG_AR_2011-12_Web.pdf">Annual Report 2011-2012</a></strong></li>
+<li>
+						<strong><a href="https://auto.iitg.ernet.in/epay"><span data-scayt_word="IITG" data-scaytid="30">IITG</span> Online Payment</a></strong></li>
+<li>
+						<a href="http://www.iiitg.ac.in"><span style="color: rgb(255, 0, 0);"><strong><span data-scayt_word="IIIT" data-scaytid="33">IIIT</span> <span data-scayt_word="Guwahati" data-scaytid="31">Guwahati</span></strong></span></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+  </div>
+
+  
+<!--  
+  
+  </div>
+-->
+<!-- /#node-128 -->
+
+                </div>
+              </div><!-- /content-inner -->
+            </div><!-- /content -->
+
+                      </div><!-- /content-wrapper -->
+          
+          
+          
+          
+            
+
+                    <div id="footer" class="clearfix">
+                        
+<!-- start block.tpl.php -->
+<div class="block-wrapper odd">
+        
+        <div id="block-menu-secondary-links" class="block block-menu">
+                    <div class="content">
+            <ul class="menu"><li class="leaf first"><a href="/placement" title="
+">Placement</a></li>
+<li class="leaf"><a href="/scifac/qip/public_html/index.html" title="
+">QIP</a></li>
+<li class="leaf"><a href="/stud/gymkhana/" title="
+">Student Activities</a></li>
+<li class="leaf"><a href="/web-courses" title="
+">Web Courses</a></li>
+<li class="leaf"><a href="/cca" title="
+">Citizen Centric Administration</a></li>
+<li class="leaf"><a href="/disclaimer" title="">Disclaimer</a></li>
+<li class="leaf"><a href="http://www.iitsystem.ac.in/" title="">IIT System Portal</a></li>
+<li class="leaf last"><a href="/sitemap" title="
+">Sitemap</a></li>
+</ul>          </div>
+        </div>
+  
+    
+</div>
+<!-- /end block.tpl.php -->
+                                                <p>
+	&copy; 2014 Indian Institute of Technology <span data-scaytid="1" word="Guwahati"><span word="Guwahati" data-scaytid="1">Guwahati</span></span>. For queries contact webmaster@iitg.ernet.in</p>
+                      </div><!-- /footer -->
+                    
+        </div><!-- /main -->
+      </div><!-- /main-wrapper -->
+    </div><!-- /page -->
+    <script type="text/javascript" src="/sites/all/modules/google_cse/google_cse.js?u"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, { "googleCSE": { "language": "en" } });
+//--><!]]>
+</script>
+  </body>
+</html>
